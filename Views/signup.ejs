@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - ShopEase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f8f9fa;
+        }
+
+        /* Main Container */
+        .container {
+            display: flex;
+            width: 850px;
+            background: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        /* Left Section */
+        .left-section {
+            flex: 1;
+            background: #FF6B6B;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .left-section h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .left-section p {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .illustration {
+            width: 100%;
+            max-width: 350px;
+        }
+
+        /* Right Section */
+        .right-section {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .small-icon {
+            width: 150px;
+            margin-right: 10px;
+        }
+
+        .right-section h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .right-section p {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .signup-btn {
+            background: #FF6B6B;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .signup-btn:hover {
+            background: #E65050;
+        }
+
+        .login-link {
+            margin-top: 10px;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .google-btn, .facebook-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .google-btn {
+            background: #DB4437;
+            color: white;
+        }
+
+        .facebook-btn {
+            background: #3B5998;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left-section">
+            <h2>Unlock the Future of E-Commerce</h2>
+            <p>Manage your online store with ease using our powerful, user-friendly dashboard.</p>
+            <img src="http://localhost:5000/images/shop.jpg" alt="E-commerce Illustration" class="illustration">
+        </div>
+
+        <!-- Right Section (Signup Form) -->
+        <div class="right-section">
+            <div class="brand">
+                <img src="http://localhost:5000/images/logo.jpg" alt="ShopEase Logo" class="small-icon">
+                <span>ShopEase</span>
+            </div>
+            <h2>Create an Account</h2>
+            <p>Sign up to start managing your e-commerce store efficiently.</p>
+            
+            <form action="/register" method="POST">
+                <input type="text" name="fullname" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
+                <button type="submit" class="signup-btn">Sign Up</button>
+            </form>
+            
+            <p class="login-link">Already have an account? <a href="/login">Login</a></p>
+
+            <div class="social-login">
+                <button class="google-btn">Sign Up with Google</button>
+                <button class="facebook-btn">Sign Up with Facebook</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
