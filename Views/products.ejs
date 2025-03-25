@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products Page</title>
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F8F9FA;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            text-align: center;
+            background: url('/images/back') no-repeat center center;
+            background-size: cover; 
+            background-position: center;
+            background-attachment: fixed; 
+            padding: 100px 20px;
+            color: black;
+             position: relative;
+        }
+
+
+        .learn-more {
+            background: white;
+            color: #FF6B6B;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Category Section */
+        .categories {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            padding: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* Category Cards */
+        .category-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 120px;  /* Slightly increase to maintain proportion */
+            height: 180px; /* Adjust height */
+            text-align: center;
+        }
+
+
+        .category-card img {
+            display: block;
+            margin: auto;
+            width: 100px; 
+            height: 100px; 
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+
+        .category-card p {
+            font-size: 14px;
+            font-weight: bold;
+            color: black;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-title {
+            text-align: center;
+            color: #FF6B6B;
+            margin-top: 20px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 20px;
+            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .product-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+        }
+
+        .product-card img {
+            width: 25%;
+            border-radius: 10px;
+        }
+
+        .buy-now {
+            background: #FF6B6B;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="header">
+        <h1>Shopping And Department Store</h1>
+        <p>Shopping is a relaxing hobby, but sometimes troubling for the bank balance.</p>
+        <button class="learn-more">Learn More</button>
+    </header>
+
+    <!-- Categories -->
+    <section class="categories">
+        <div class="category-card" onclick="showCategory('all')">
+            <img src="/images/alls.jpg" alt="All">
+            <p>All</p>
+        </div>
+        <div class="category-card" onclick="showCategory('furniture')">
+            <img src="/images/furniture.jpg" alt="Furniture">
+            <p>Furniture</p>
+        </div>
+        <div class="category-card" onclick="showCategory('handbag')">
+            <img src="/images/handbag.jpg" alt="Hand Bag">
+            <p>Hand Bag</p>
+        </div>
+        <div class="category-card" onclick="showCategory('books')">
+            <img src="/images/books.jpg" alt="Books">
+            <p>Books</p>
+        </div>
+        <div class="category-card" onclick="showCategory('tech')">
+            <img src="/images/tech.jpg" alt="Tech">
+            <p>Tech</p>
+        </div>
+        <div class="category-card" onclick="showCategory('sneakers')">
+            <img src="/images/sneakers.jpg" alt="Sneakers">
+            <p>Sneakers</p>
+        </div>
+        <div class="category-card" onclick="showCategory('travel')">
+            <img src="/images/travel.jpg" alt="Travel">
+            <p>Travel</p>
+        </div>
+    </section>
+
+    <!-- Product List -->
+    <h2 class="product-title">Product List</h2>
+    <div class="products">
+        <% products.forEach(product => { %>
+            <div class="product-card" data-category="<%= product.category %>">
+                <h3><%= product.name %></h3>
+                <p>Price: $<%= product.price %></p>
+                <img src="<%= product.image.startsWith('http') ? product.image : '/images/' + product.image %>" 
+                     alt="<%= product.name %>">
+                <form action="/cart/add" method="POST">
+                    <input type="hidden" name="productId" value="<%= product.id %>">
+                    <input type="hidden" name="productName" value="<%= product.name %>">
+                    <input type="hidden" name="productPrice" value="<%= product.price %>">
+                    <input type="hidden" name="productImage" value="<%= product.image %>">
+                    <button type="submit" class="buy-now">Add to Cart</button>
+                </form>
+            </div>
+        <% }) %>
+    </div>
+
+
+    <script>
+        function showCategory(category) {
+            const productCards = document.querySelectorAll('.product-card');
+
+            productCards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block'; 
+                } else {
+                    card.style.display = 'none'; 
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
