@@ -11,11 +11,11 @@ router.get("/", async (req, res) => {
             ...doc.data()
         }));
 
-        console.log("📦 Products fetched:", productList); 
+        console.log("Products fetched:", productList); 
 
         res.render("products", { products: productList }); 
     } catch (error) {
-        console.error("❌ Error fetching products:", error);
+        console.error("Error fetching products:", error);
         res.status(500).send("Error fetching products");
     }
 });
