@@ -12,12 +12,12 @@ router.get("/register", (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-    console.log("📥 Incoming request to /register", req.body);
+    console.log("Incoming request to /register", req.body);
 
     const { fullname, email, password, confirmPassword } = req.body;
 
     if (password !== confirmPassword) {
-        console.log("❌ Passwords do not match.");
+        console.log("Passwords do not match.");
         return res.status(400).send("Passwords do not match");
     }
 
@@ -25,10 +25,10 @@ router.post("/register", async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         await db.collection("users").add({ fullname, email, password: hashedPassword });
 
-        console.log("✅ User registered successfully:", email);
+        console.log("User registered successfully:", email);
         res.redirect("/login");  
     } catch (error) {
-        console.error("❌ Error registering user:", error);
+        console.error("Error registering user:", error);
         res.status(500).send("Error registering user");
     }
 });
@@ -38,7 +38,7 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-    console.log("📥 Login request received:", req.body);
+    console.log("Login request received:", req.body);
 
     const { email, password } = req.body;
 
@@ -46,7 +46,7 @@ router.post("/login", async (req, res) => {
         const snapshot = await db.collection("users").where("email", "==", email).get();
 
         if (snapshot.empty) {
-            console.log("⚠️ User not found.");
+            console.log("User not found.");
             return res.status(400).send("User not found. Please sign up first.");
         }
 
@@ -54,16 +54,16 @@ router.post("/login", async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
-            console.log("❌ Invalid credentials.");
+            console.log("Invalid credentials.");
             return res.status(400).send("Invalid email or password.");
         }
 
         req.session.user = { email: user.email, fullname: user.fullname };
 
-        console.log("✅ Login successful:", user.email);
+        console.log("Login successful:", user.email);
         res.redirect("/dashboard");  
     } catch (error) {
-        console.error("❌ Login Error:", error);
+        console.error("Login Error:", error);
         res.status(500).send("Error logging in.");
     }
 });
